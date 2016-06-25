@@ -29,6 +29,14 @@ div.vertical {
 	border-right-style:solid;
 }
 
+div.center {
+	width:6em;
+	height:6em;
+	/*background-image:url('images/circle.png');*/
+	margin-top: 2em;
+	background-repeat:no-repeat;
+}
+
 button {
 	margin-top: 5em;
 }
