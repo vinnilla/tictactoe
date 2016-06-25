@@ -1,0 +1,3 @@
+# tictactoe
+
+This is my tic tac toe project. Two players take turns placing their respective symbols (and X for player 1 and a circle for player 2) by clicking on an open square. Clicks made on squares already containing a symbol will have no effect. Furthermore, when a player successfully places three of their symbols in a row, the game will end with a victory message. If the game ends in a tie, then an appropriate message displays. The reset button can be used to reset the game board so that another round can be played. The dark/light button can be used to change the white background to a darker one and vice versa. I have tested the game for bugs and I believe I have solved them all (hopefully.)
