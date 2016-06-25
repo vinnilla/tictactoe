@@ -109,7 +109,7 @@ var victory = function(winner) {
 //tie testing
 function tieTest() {
 	//test win conditions one last time
-	window.alert('tie');
+	// window.alert('tie');
 	document.getElementById('firstText').innerHTML = ('The game ends in a tie.');
 	document.getElementById('winningPlayer').classList.remove('cross');
 	document.getElementById('winningPlayer').classList.remove('dark');
