@@ -27,7 +27,7 @@ h3 {
 	display:inline;
 }
 
-div {
+div, p {
 	width:10em;
 	height:10em;
 	display: inline-block;
@@ -46,7 +46,7 @@ div.vertical {
 	border-right-style:solid;
 }
 
-div#currentPlayer {
+div#currentPlayer, div#winningPlayer {
 	width:2em;
 	height:2em;
 	/*background-image:url('images/circle.png');*/
@@ -65,11 +65,11 @@ div.center {
 }
 
 
-div.center.cross, div#currentPlayer.cross {
+div.center.cross, div#currentPlayer.cross, div#winningPlayer.cross {
 	background-image:url('images/x.png');
 }
 
-div.center.circle, div#currentPlayer.circle {
+div.center.circle, div#currentPlayer.circle, div#winningPlayer.circle {
 	background-image:url('images/circle.png');
 }
 
@@ -79,4 +79,8 @@ button {
 
 .hidden {
 	display:none;
+}
+
+#secondText, #firstText {
+	width: auto;
 }

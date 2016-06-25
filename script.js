@@ -64,14 +64,20 @@ var victory = function(winner) {
 	//show message
 	var message = document.getElementById('message');
 	message.classList.remove('hidden');
+	var winningImage = document.getElementById('winningPlayer');
 	if (winner==1) {
-		message.textContent = ('The winner is player 1!');
+		winningImage.classList.remove('circle');
+		winningImage.classList.add('cross');
 	}
 	else if (winner==2) {
-		message.textContent = ('The winner is player 2!');
+		winningImage.classList.remove('cross');
+		winningImage.classList.add('circle');
 	}
-	else {
-		message.textContent = ('The game ends in a tie.');
+	else {//tie logic
+		document.getElementById('firstText').innerHTML = ('The game ends in a tie.');
+		winningImage.classList.remove('cross');
+		winningImage.classList.remove('circle');
+		document.getElementById('secondText').classList.add('hidden');
 	}
 }
 //create function to calculate victory
@@ -220,11 +226,6 @@ button.addEventListener('click', function() {
 		//restore calculate event listener
 		sectionArray[i].addEventListener('mouseup', calculate);
 
-		//reset player to 0
-		turn = 0;
-
-		//reset board
-		board = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 	}
 	//first player will always be cross
 	currentPlayer.classList.add('cross');
@@ -234,6 +235,18 @@ button.addEventListener('click', function() {
 
 	//hide message
 	document.getElementById('message').classList.add('hidden');
+
+	//reset message after tie
+	if (turn == sectionArray.length) {
+		document.getElementById('firstText').innerHTML = ('Congratulations Player ');
+		document.getElementById('secondText').classList.remove('hidden')
+	}
+
+	//reset player to 0
+	turn = 0;
+
+	//reset board
+	board = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 });
 
 console.log(turn);
