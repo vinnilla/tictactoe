@@ -1,9 +1,9 @@
+//----------GLOBAL VARIABLE CREATION----------//
 var board = [
 	[0, 0, 0],
 	[0, 0, 0],
 	[0, 0, 0]
 ];
-
 //create global variable to keep track of which turn it is
 //this will also act as a counter
 var turn=0;
@@ -13,6 +13,11 @@ var sectionArray = document.getElementsByClassName('main');
 var currentPlayer = document.getElementById('currentPlayer');
 //first player will always be cross
 currentPlayer.classList.add('cross');
+//hide message
+document.getElementById('message').classList.add('hidden');
+
+//----------GLOBAL FUNCTION CREATION----------//
+
 //create function to add appropriate classes
 var addClass = function() {
 	if (turn%2 == 0) { //check if player 1
@@ -34,12 +39,12 @@ var addClass = function() {
 }
 //create victory function
 var victory = function(winner) {
-	if (winner == 1){
-		console.log('winner is player 1');
-	}
-	else {
-		console.log('winner is player 2');
-	}
+	// if (winner == 1){
+	// 	console.log('winner is player 1');
+	// }
+	// else {
+	// 	console.log('winner is player 2');
+	// }
 	
 	for (var i=0; i<sectionArray.length; i++) {
 		//remove addClass event listener for all boxes
@@ -53,6 +58,20 @@ var victory = function(winner) {
 	}
 	else {
 		currentPlayer.classList.remove('circle');
+	}
+	//hide currentPlayer stat
+	document.getElementById('stats').classList.add('hidden');
+	//show message
+	var message = document.getElementById('message');
+	message.classList.remove('hidden');
+	if (winner==1) {
+		message.textContent = ('The winner is player 1!');
+	}
+	else if (winner==2) {
+		message.textContent = ('The winner is player 2!');
+	}
+	else {
+		message.textContent = ('The game ends in a tie.');
 	}
 }
 //create function to calculate victory
@@ -122,7 +141,14 @@ var calculate = function() {
 	else if ((board[0][2] + board[1][1] + board[2][0]) == 12){
 		victory(2);
 	}
+
+	//test tie condition
+	if (turn == sectionArray.length) {
+		victory();
+	}
 }
+
+//----------GAME LOGIC----------//
 
 //initiate for loop to populate each div with eventlisteners
 for (var i=0; i<sectionArray.length; i++) {
@@ -202,4 +228,12 @@ button.addEventListener('click', function() {
 	}
 	//first player will always be cross
 	currentPlayer.classList.add('cross');
+
+	//reset currentPlayer stat
+	document.getElementById('stats').classList.remove('hidden');
+
+	//hide message
+	document.getElementById('message').classList.add('hidden');
 });
+
+console.log(turn);

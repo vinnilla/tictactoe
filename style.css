@@ -2,13 +2,18 @@ body {
 	text-align: center;
 }
 
-/*h1 {
-	margin-bottom:0;
+#title {
+	font-size: 3em;
 }
-*/
-#stats {
+
+#stats, #message{
 	margin-bottom: 1em;
 }
+
+#message {
+	height: 25px;
+}
+
 
 #gameboard {
 	width:90%;
@@ -70,4 +75,8 @@ div.center.circle, div#currentPlayer.circle {
 
 button {
 	margin-top: 5em;
+}
+
+.hidden {
+	display:none;
 }
