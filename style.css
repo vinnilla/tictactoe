@@ -1,0 +1,34 @@
+body {
+	text-align: center;
+}
+
+#gameboard {
+	width:90%;
+	max-width:33em;
+	max-height:33em;
+	margin: 0 auto;
+	clear:both;
+}
+
+div {
+	width:10em;
+	height:10em;
+	display: inline-block;
+	margin:-2px;
+}
+
+div.corner {
+	border-style: none solid solid none;
+}
+
+div.horizontal {
+	border-bottom-style:solid;
+}
+
+div.vertical {
+	border-right-style:solid;
+}
+
+button {
+	margin-top: 5em;
+}
