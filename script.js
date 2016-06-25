@@ -102,16 +102,22 @@ var victory = function(winner) {
 		winningImage.classList.remove('cross');
 		winningImage.classList.add('circle');
 	}
-	else {//tie logic
-		document.getElementById('firstText').innerHTML = ('The game ends in a tie.');
-		winningImage.classList.remove('cross');
-		winningImage.classList.remove('dark');
-		winningImage.classList.remove('circle');
-		document.getElementById('secondText').classList.add('hidden');
+	else{//tie logic
+		tieTest();
 	}
 }
-//create function to calculate victory
-var calculate = function() {
+//tie testing
+function tieTest() {
+	//test win conditions one last time
+	window.alert('tie');
+	document.getElementById('firstText').innerHTML = ('The game ends in a tie.');
+	document.getElementById('winningPlayer').classList.remove('cross');
+	document.getElementById('winningPlayer').classList.remove('dark');
+	document.getElementById('winningPlayer').classList.remove('circle');
+	document.getElementById('secondText').classList.add('hidden');
+}
+//brute force comparison function
+function bruteTest(tie) {
 	//access board to test for wins
 	//1 = player 1 (cross); victory -> sum of 3
 	//4 = player 2 (circle); victory -> sum of 12
@@ -119,68 +125,80 @@ var calculate = function() {
 	//rows
 	//first
 	if ((board[0][0] + board[0][1] + board[0][2]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][0] + board[0][1] + board[0][2]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 	//second
 	if ((board[1][0] + board[1][1] + board[1][2]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[1][0] + board[1][1] + board[1][2]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 	//third
 	if ((board[2][0] + board[2][1] + board[2][2]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[2][0] + board[2][1] + board[2][2]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 
 	//columns
 	//first
 	if ((board[0][0] + board[1][0] + board[2][0]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][0] + board[1][0] + board[2][0]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 	//second
 	if ((board[0][1] + board[1][1] + board[2][1]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][1] + board[1][1] + board[2][1]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 	//third
 	if ((board[0][2] + board[1][2] + board[2][2]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][2] + board[1][2] + board[2][2]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 
 	//diagonal
 	//left to right
 	if ((board[0][0] + board[1][1] + board[2][2]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][0] + board[1][1] + board[2][2]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
 	//right to left
 	if ((board[0][2] + board[1][1] + board[2][0]) == 3) {
-		victory(1);
+		victory(1); return true;
 	}
 	else if ((board[0][2] + board[1][1] + board[2][0]) == 12){
-		victory(2);
+		victory(2); return true;
 	}
+
+	if (tie == 3){
+		victory(3); return false;
+	}
+	else if (tie == 4) {
+		victory(4); return false;
+	} 
+	
+}
+//create function to calculate victory
+function calculate() {
+	bruteTest();
 
 	//test tie condition
 	if (turn == sectionArray.length) {
-		victory();
+		bruteTest(3);
 	}
 }
 
