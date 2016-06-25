@@ -42,12 +42,19 @@ var button = document.querySelector('button');
 button.addEventListener('click', function() {
 	//iterate through the number of divs (9)
 	for (var i=0; i<sectionArray.length; i++) {
+		//remove images
 		//check if class cross exists
 		if (sectionArray[i].firstChild.classList.contains('cross')){
 			sectionArray[i].firstChild.classList.remove('cross');
 		}
 		else {
 			sectionArray[i].firstChild.classList.remove('circle');	
-		}	
+		}
+
+		//restore addClass event listener
+		sectionArray[i].addEventListener('mousedown', addClass);
+
+		//reset player to 1
+		player = 1;	
 	}
 });
