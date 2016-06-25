@@ -37,6 +37,14 @@ div.center {
 	background-repeat:no-repeat;
 }
 
+div.center.cross {
+	background-image:url('images/x.png');
+}
+
+div.center.circle {
+	background-image:url('images/circle.png');
+}
+
 button {
 	margin-top: 5em;
 }
