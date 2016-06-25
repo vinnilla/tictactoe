@@ -32,6 +32,10 @@ var victory = function(winner) {
 	else {
 		console.log('winner is player 2');
 	}
+	//remove addClass event listener for all boxes
+	for (var i=0; i<sectionArray.length; i++) {
+		sectionArray[i].removeEventListener('mousedown',addClass);
+	}
 }
 
 //initiate for loop to populate each div with eventlisteners
