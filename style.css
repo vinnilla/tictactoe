@@ -84,3 +84,11 @@ button {
 #secondText, #firstText {
 	width: auto;
 }
+
+body.dark{
+	background-color:rgba(0,0,5,.9);
+	color: white;
+}
+div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark {
+	background-image:url('images/xyellow.png');
+}

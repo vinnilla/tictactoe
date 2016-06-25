@@ -7,6 +7,8 @@ var board = [
 //create global variable to keep track of which turn it is
 //this will also act as a counter
 var turn=0;
+//dark button counter
+var count=0;
 //store pointers to each main div in an array
 var sectionArray = document.getElementsByClassName('main');
 //store pointer to current player stat
@@ -18,11 +20,26 @@ document.getElementById('message').classList.add('hidden');
 
 //----------GLOBAL FUNCTION CREATION----------//
 
+//create dark UI function
+var dark = function() {
+	if (count%2 == 0) {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
 //create function to add appropriate classes
 var addClass = function() {
 	if (turn%2 == 0) { //check if player 1
 		//add .cross to the div found within
-		this.firstChild.classList.add('cross');
+		if (dark()) {
+			this.firstChild.classList.add('dark');
+		}
+		else {
+			this.firstChild.classList.add('cross');
+		}
+		currentPlayer.classList.remove('dark');
 		currentPlayer.classList.remove('cross');
 		currentPlayer.classList.add('circle');
 	}
@@ -30,7 +47,12 @@ var addClass = function() {
 		//add .circle to the div found within
 		this.firstChild.classList.add('circle');
 		currentPlayer.classList.remove('circle');
-		currentPlayer.classList.add('cross');
+		if (dark()) {
+			currentPlayer.classList.add('dark');
+		}
+		else {
+			currentPlayer.classList.add('cross');			
+		}
 	}
 	//add to counter which creates the alternating turn functionality
 	turn++;
@@ -59,6 +81,7 @@ var victory = function(winner) {
 	else {
 		currentPlayer.classList.remove('circle');
 	}
+	currentPlayer.classList.remove('dark');
 	//hide currentPlayer stat
 	document.getElementById('stats').classList.add('hidden');
 	//show message
@@ -67,15 +90,22 @@ var victory = function(winner) {
 	var winningImage = document.getElementById('winningPlayer');
 	if (winner==1) {
 		winningImage.classList.remove('circle');
-		winningImage.classList.add('cross');
+		if (dark()) {
+			winningImage.classList.add('dark');
+		}
+		else {
+			winningImage.classList.add('cross');
+		}
 	}
 	else if (winner==2) {
+		winningImage.classList.remove('dark');
 		winningImage.classList.remove('cross');
 		winningImage.classList.add('circle');
 	}
 	else {//tie logic
 		document.getElementById('firstText').innerHTML = ('The game ends in a tie.');
 		winningImage.classList.remove('cross');
+		winningImage.classList.remove('dark');
 		winningImage.classList.remove('circle');
 		document.getElementById('secondText').classList.add('hidden');
 	}
@@ -206,8 +236,8 @@ for (var i=0; i<sectionArray.length; i++) {
 }
 
 //make reset button work
-//store pointer to the button
-var button = document.querySelector('button');
+//store pointer to the reset button
+var button = document.querySelectorAll('button')[0];
 //addEventListener
 button.addEventListener('click', function() {
 	//iterate through the number of divs (9)
@@ -220,6 +250,7 @@ button.addEventListener('click', function() {
 		else {
 			sectionArray[i].firstChild.classList.remove('circle');	
 		}
+		sectionArray[i].firstChild.classList.remove('dark');
 
 		//restore addClass event listener
 		sectionArray[i].addEventListener('mousedown', addClass);
@@ -228,7 +259,12 @@ button.addEventListener('click', function() {
 
 	}
 	//first player will always be cross
-	currentPlayer.classList.add('cross');
+	if (dark()) {
+		currentPlayer.classList.add('dark');
+	}
+	else {
+		currentPlayer.classList.add('cross');
+	}
 
 	//reset currentPlayer stat
 	document.getElementById('stats').classList.remove('hidden');
@@ -249,4 +285,37 @@ button.addEventListener('click', function() {
 	board = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 });
 
-console.log(turn);
+//store pointer to dark/light button
+var darkButton = document.querySelectorAll('button')[1];
+darkButton.addEventListener('click', function() {
+	document.querySelector('body').classList.toggle('dark');
+	for (var i=0; i<sectionArray.length; i++) {
+		if (sectionArray[i].firstChild.classList.contains('cross')) {
+			sectionArray[i].firstChild.classList.remove('cross');
+			sectionArray[i].firstChild.classList.add('dark');
+		}
+		else if (sectionArray[i].firstChild.classList.contains('dark')) {
+			sectionArray[i].firstChild.classList.remove('dark');
+			sectionArray[i].firstChild.classList.add('cross');
+		}
+	}
+	if (currentPlayer.classList.contains('cross')) {
+		currentPlayer.classList.remove('cross');
+		currentPlayer.classList.add('dark');
+	}
+	else if (currentPlayer.classList.contains('dark')) {
+		currentPlayer.classList.remove('dark');
+		currentPlayer.classList.add('cross');
+	}
+	var winner = document.getElementById('winningPlayer')
+	if (winner.classList.contains('cross')) {
+		winner.classList.remove('cross');
+		winner.classList.add('dark');
+	}
+	else if (winner.classList.contains('dark')) {
+		winner.classList.remove('dark');
+		winner.classList.add('cross');
+	}
+
+	count++;
+});
