@@ -2,12 +2,24 @@ body {
 	text-align: center;
 }
 
+/*h1 {
+	margin-bottom:0;
+}
+*/
+#stats {
+	margin-bottom: 1em;
+}
+
 #gameboard {
 	width:90%;
 	max-width:33em;
 	max-height:33em;
 	margin: 0 auto;
 	clear:both;
+}
+
+h3 {
+	display:inline;
 }
 
 div {
@@ -29,6 +41,16 @@ div.vertical {
 	border-right-style:solid;
 }
 
+div#currentPlayer {
+	width:2em;
+	height:2em;
+	/*background-image:url('images/circle.png');*/
+	background-size: 100%;
+	background-repeat:no-repeat;
+	background-position: center;
+	margin-bottom:-10px;
+}
+
 div.center {
 	width:6em;
 	height:6em;
@@ -37,11 +59,12 @@ div.center {
 	background-repeat:no-repeat;
 }
 
-div.center.cross {
+
+div.center.cross, div#currentPlayer.cross {
 	background-image:url('images/x.png');
 }
 
-div.center.circle {
+div.center.circle, div#currentPlayer.circle {
 	background-image:url('images/circle.png');
 }
 

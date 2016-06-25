@@ -9,15 +9,23 @@ var board = [
 var turn=0;
 //store pointers to each main div in an array
 var sectionArray = document.getElementsByClassName('main');
+//store pointer to current player stat
+var currentPlayer = document.getElementById('currentPlayer');
+//first player will always be cross
+currentPlayer.classList.add('cross');
 //create function to add appropriate classes
 var addClass = function() {
 	if (turn%2 == 0) { //check if player 1
 		//add .cross to the div found within
 		this.firstChild.classList.add('cross');
+		currentPlayer.classList.remove('cross');
+		currentPlayer.classList.add('circle');
 	}
 	else { //player 2
 		//add .circle to the div found within
 		this.firstChild.classList.add('circle');
+		currentPlayer.classList.remove('circle');
+		currentPlayer.classList.add('cross');
 	}
 	//add to counter which creates the alternating turn functionality
 	turn++;
@@ -38,6 +46,13 @@ var victory = function(winner) {
 		sectionArray[i].removeEventListener('mousedown', addClass);
 		//remove calculate for all boxes
 		sectionArray[i].removeEventListener('mouseup', calculate);
+	}
+	//remove currentPlayer image
+	if (currentPlayer.classList.item[0] == 'cross') {
+		currentPlayer.classList.remove('cross');
+	}
+	else {
+		currentPlayer.classList.remove('circle');
 	}
 }
 //create function to calculate victory
@@ -185,4 +200,6 @@ button.addEventListener('click', function() {
 		//reset board
 		board = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
 	}
+	//first player will always be cross
+	currentPlayer.classList.add('cross');
 });
