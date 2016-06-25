@@ -32,9 +32,80 @@ var victory = function(winner) {
 	else {
 		console.log('winner is player 2');
 	}
-	//remove addClass event listener for all boxes
+	
 	for (var i=0; i<sectionArray.length; i++) {
-		sectionArray[i].removeEventListener('mousedown',addClass);
+		//remove addClass event listener for all boxes
+		sectionArray[i].removeEventListener('mousedown', addClass);
+		//remove calculate for all boxes
+		sectionArray[i].removeEventListener('mouseup', calculate);
+	}
+}
+//create function to calculate victory
+var calculate = function() {
+	//access board to test for wins
+	//1 = player 1 (cross); victory -> sum of 3
+	//4 = player 2 (circle); victory -> sum of 12
+	//test each possible case
+	//rows
+	//first
+	if ((board[0][0] + board[0][1] + board[0][2]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][0] + board[0][1] + board[0][2]) == 12){
+		victory(2);
+	}
+	//second
+	if ((board[1][0] + board[1][1] + board[1][2]) == 3) {
+		victory(1);
+	}
+	else if ((board[1][0] + board[1][1] + board[1][2]) == 12){
+		victory(2);
+	}
+	//third
+	if ((board[2][0] + board[2][1] + board[2][2]) == 3) {
+		victory(1);
+	}
+	else if ((board[2][0] + board[2][1] + board[2][2]) == 12){
+		victory(2);
+	}
+
+	//columns
+	//first
+	if ((board[0][0] + board[1][0] + board[2][0]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][0] + board[1][0] + board[2][0]) == 12){
+		victory(2);
+	}
+	//second
+	if ((board[0][1] + board[1][1] + board[2][1]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][1] + board[1][1] + board[2][1]) == 12){
+		victory(2);
+	}
+	//third
+	if ((board[0][2] + board[1][2] + board[2][2]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][2] + board[1][2] + board[2][2]) == 12){
+		victory(2);
+	}
+
+	//diagonal
+	//left to right
+	if ((board[0][0] + board[1][1] + board[2][2]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][0] + board[1][1] + board[2][2]) == 12){
+		victory(2);
+	}
+	//right to left
+	if ((board[0][2] + board[1][1] + board[2][0]) == 3) {
+		victory(1);
+	}
+	else if ((board[0][2] + board[1][1] + board[2][0]) == 12){
+		victory(2);
 	}
 }
 
@@ -84,74 +155,7 @@ for (var i=0; i<sectionArray.length; i++) {
 	// });
 
 	//add function that tests for a winner
-	sectionArray[i].addEventListener('mouseup',function() {
-		//access board to test for wins
-		//1 = player 1 (cross); victory -> sum of 3
-		//4 = player 2 (circle); victory -> sum of 12
-		//test each possible case
-		//rows
-		//first
-		if ((board[0][0] + board[0][1] + board[0][2]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][0] + board[0][1] + board[0][2]) == 12){
-			victory(2);
-		}
-		//second
-		if ((board[1][0] + board[1][1] + board[1][2]) == 3) {
-			victory(1);
-		}
-		else if ((board[1][0] + board[1][1] + board[1][2]) == 12){
-			victory(2);
-		}
-		//third
-		if ((board[2][0] + board[2][1] + board[2][2]) == 3) {
-			victory(1);
-		}
-		else if ((board[2][0] + board[2][1] + board[2][2]) == 12){
-			victory(2);
-		}
-
-		//columns
-		//first
-		if ((board[0][0] + board[1][0] + board[2][0]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][0] + board[1][0] + board[2][0]) == 12){
-			victory(2);
-		}
-		//second
-		if ((board[0][1] + board[1][1] + board[2][1]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][1] + board[1][1] + board[2][1]) == 12){
-			victory(2);
-		}
-		//third
-		if ((board[0][2] + board[1][2] + board[2][2]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][2] + board[1][2] + board[2][2]) == 12){
-			victory(2);
-		}
-
-		//diagonal
-		//left to right
-		if ((board[0][0] + board[1][1] + board[2][2]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][0] + board[1][1] + board[2][2]) == 12){
-			victory(2);
-		}
-		//right to left
-		if ((board[0][2] + board[1][1] + board[2][0]) == 3) {
-			victory(1);
-		}
-		else if ((board[0][2] + board[1][1] + board[2][0]) == 12){
-			victory(2);
-		}
-
-	});//end of victory event listener
+	sectionArray[i].addEventListener('mouseup',calculate);//end of victory event listener
 }
 
 //make reset button work
@@ -172,6 +176,8 @@ button.addEventListener('click', function() {
 
 		//restore addClass event listener
 		sectionArray[i].addEventListener('mousedown', addClass);
+		//restore calculate event listener
+		sectionArray[i].addEventListener('mouseup', calculate);
 
 		//reset player to 0
 		turn = 0;
