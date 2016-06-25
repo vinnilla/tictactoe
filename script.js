@@ -9,6 +9,10 @@ var board = [
 var turn=0;
 //dark button counter
 var count=0;
+//p1 wins
+var p1Wins=0;
+//p2 wins
+var p2Wins=0;
 //store pointers to each main div in an array
 var sectionArray = document.getElementsByClassName('main');
 //store pointer to current player stat
@@ -96,11 +100,17 @@ var victory = function(winner) {
 		else {
 			winningImage.classList.add('cross');
 		}
+		//update p1 wins
+		p1Wins++;
+		document.getElementById('p1score').textContent = p1Wins;
 	}
 	else if (winner==2) {
 		winningImage.classList.remove('dark');
 		winningImage.classList.remove('cross');
 		winningImage.classList.add('circle');
+		//update p2 wins
+		p2Wins++;
+		document.getElementById('p2score').textContent = p2Wins;
 	}
 	else{//tie logic
 		tieTest();
@@ -325,6 +335,17 @@ darkButton.addEventListener('click', function() {
 		currentPlayer.classList.remove('dark');
 		currentPlayer.classList.add('cross');
 	}
+
+	var score1 = document.getElementById('player1')
+	if (score1.classList.contains('cross')) {
+		score1.classList.remove('cross');
+		score1.classList.add('dark');
+	}
+	else if (score1.classList.contains('dark')) {
+		score1.classList.remove('dark');
+		score1.classList.add('cross');
+	}
+
 	var winner = document.getElementById('winningPlayer')
 	if (winner.classList.contains('cross')) {
 		winner.classList.remove('cross');

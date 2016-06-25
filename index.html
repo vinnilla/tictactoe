@@ -3,17 +3,34 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
+	<title>Tic Tac Toe</title>
+	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type='text/css' href="style.css">
 </head>
 <body>
 	<h1 id="title">Tic-Tac-Toe</h1>
+	<section id="score">
+		<div id="player1" class='cross'>
+			<div id='colon1'>:
+				<div id="p1score">0</div>
+			</div>
+			
+		</div>
+		
+		<div id='player2' class='circle'>
+			<div id='colon2'>:
+				<div id="p2score">0</div>
+			</div>
+			
+		</div>
+		
+	</section>
 	<section id='stats'>
 		<h3>Current Player:</h3>
 		<div id='currentPlayer'></div>
 	</section>
 	<section id='message'>
-		<p id="firstText">Congratulations Player </p>
+		<p id="firstText">Congratulations player </p>
 		<div id='winningPlayer'></div>
 		<div id='secondText'>! You win!</div>
 	</section>
