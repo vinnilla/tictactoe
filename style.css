@@ -1,27 +1,7 @@
+/*general spacing*/
 body {
 	text-align: center;
 	font-family: 'Oswald', san-serif;
-}
-
-#title {
-	font-size: 3em;
-}
-
-#stats, #message, #score{
-	margin-bottom: 1em;
-}
-
-#message {
-	height: 27px;
-}
-
-
-#gameboard {
-	width:90%;
-	max-width:33em;
-	max-height:33em;
-	margin: 0 auto;
-	clear:both;
 }
 
 h3 {
@@ -33,6 +13,37 @@ div, p {
 	height:10em;
 	display: inline-block;
 	margin:-2px;
+}
+
+button {
+	margin-top: 5em;
+}
+
+#title {
+	font-size: 3em;
+	display: inline-block;
+}
+
+#stats, #message, #score{
+	margin-bottom: 1em;
+}
+
+#secondText, #firstText {
+	width: auto;
+}
+
+#message {
+	height: 27px;
+}
+
+
+/*making the game board*/
+#gameboard {
+	width:90%;
+	max-width:33em;
+	max-height:33em;
+	margin: 0 auto;
+	clear:both;
 }
 
 div.corner {
@@ -47,6 +58,7 @@ div.vertical {
 	border-right-style:solid;
 }
 
+/*stats*/
 div#currentPlayer, div#winningPlayer {
 	width:2em;
 	height:2em;
@@ -57,6 +69,7 @@ div#currentPlayer, div#winningPlayer {
 	margin-bottom:-10px;
 }
 
+/*image container*/
 div.center {
 	width:6em;
 	height:6em;
@@ -65,7 +78,7 @@ div.center {
 	background-repeat:no-repeat;
 }
 
-
+/*classes for allowing images to appear when clicked on*/
 .cross {
 	background-image:url('images/x.png');
 }
@@ -74,18 +87,12 @@ div.center {
 	background-image:url('images/circle.png');
 }
 
-button {
-	margin-top: 5em;
-}
-
+/*hiding elements to swap stats for message*/
 .hidden {
 	display:none;
 }
 
-#secondText, #firstText {
-	width: auto;
-}
-
+/*classes for dark button functionality*/
 body.dark{
 	background-color:rgba(0,0,5,.9);
 	color: white;
@@ -94,10 +101,7 @@ div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark, div#player1.dar
 	background-image:url('images/xyellow.png');
 }
 
-#title {
-	display: inline-block;
-}
-
+/*positioning of the scores*/
 #player1{
 	float:left;
 	margin-left: 20%;
@@ -148,4 +152,22 @@ div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark, div#player1.dar
 
 #colon2, #p2score {
 	right:1.2em;
+}
+
+/*making the webpage scalable*/
+#left, #right {
+	max-width:20em;
+	max-height:1em;
+}
+
+#left {
+	float:left;
+}
+
+#right {
+	float:right;
+}
+
+#content {
+	min-width: 50em;
 }

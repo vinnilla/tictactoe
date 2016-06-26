@@ -4,49 +4,63 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Tic Tac Toe</title>
+	<!-- font -->
 	<link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+	<!-- css link -->
 	<link rel="stylesheet" type='text/css' href="style.css">
 </head>
 <body>
-	<h1 id="title">Tic-Tac-Toe</h1>
-	<section id="score">
-		<div id="player1" class='cross'>
-			<div id='colon1'>:
-				<div id="p1score">0</div>
+	<div id="left"></div>
+
+	<!-- separate content from expandable 'margins' -->
+	<div id="content">
+		<h1 id="title">Tic-Tac-Toe</h1>
+		<!-- keep track of score -->
+		<section id="score">
+			<div id="player1" class='cross'>
+				<div id='colon1'>:
+					<div id="p1score">0</div>
+				</div>
+				
 			</div>
-			
-		</div>
-		
-		<div id='player2' class='circle'>
-			<div id='colon2'>:
-				<div id="p2score">0</div>
+			<div id='player2' class='circle'>
+				<div id='colon2'>:
+					<div id="p2score">0</div>
+				</div>
 			</div>
-			
-		</div>
-		
-	</section>
-	<section id='stats'>
-		<h3>Current Player:</h3>
-		<div id='currentPlayer'></div>
-	</section>
-	<section id='message'>
-		<p id="firstText">Congratulations player </p>
-		<div id='winningPlayer'></div>
-		<div id='secondText'>! You win!</div>
-	</section>
-	<section id='gameboard'>
-		<div class='corner main'><div class='center'></div></div>
-		<div class='corner main'><div class='center'></div></div>
-		<div class='horizontal main'><div class='center'></div></div>
-		<div class='corner main'><div class='center'></div></div>
-		<div class='corner main'><div class='center'></div></div>
-		<div class='horizontal main'><div class='center'></div></div>
-		<div class='vertical main'><div class='center'></div></div>
-		<div class='vertical main'><div class='center'></div></div>
-		<div class="dummy main"><div class='center'></div></div>
-	</section>
-	<button id="reset">Reset</button>
-	<button id="dark">Dark/Light</button>
-	<script src='script.js' type='text/javascript'></script>
+		<!-- keep track of current player -->
+		</section>
+		<section id='stats'>
+			<h3>Current Player:</h3>
+			<div id='currentPlayer'></div>
+		</section>
+		<!-- display message when game ends -->
+		<section id='message'>
+			<p id="firstText">Congratulations player </p>
+			<div id='winningPlayer'></div>
+			<div id='secondText'>! You win!</div>
+		</section>
+		<!-- contains the gameboard -->
+		<section id='gameboard'>
+			<div class='corner main'><div class='center'></div></div>
+			<div class='corner main'><div class='center'></div></div>
+			<div class='horizontal main'><div class='center'></div></div>
+			<div class='corner main'><div class='center'></div></div>
+			<div class='corner main'><div class='center'></div></div>
+			<div class='horizontal main'><div class='center'></div></div>
+			<div class='vertical main'><div class='center'></div></div>
+			<div class='vertical main'><div class='center'></div></div>
+			<div class="dummy main"><div class='center'></div></div>
+		</section>
+		<!-- reset button -->
+		<button id="reset">Reset</button>
+		<!-- change color scheme button -->
+		<button id="dark">Dark/Light</button>
+
+		<!-- javascript link -->
+		<script src='script.js' type='text/javascript'></script>
+	</div>
+
+	<div id="right"></div>
 </body>
 </html>
