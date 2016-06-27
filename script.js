@@ -9,18 +9,21 @@ var board = [
 var turn=0;
 //dark button counter
 var count=0;
-//p1 wins
-var p1Wins=0;
-//p2 wins
-var p2Wins=0;
+//store player stats in object
+var playerOne = {
+	symbol:'',
+	wins: 0};
+var playerTwo = {
+	symbol:'',
+	wins: 0};
 //store pointers to each main div in an array
 var sectionArray = document.getElementsByClassName('main');
 //store pointer to current player stat
 var currentPlayer = document.getElementById('currentPlayer');
-//first player will always be cross
-currentPlayer.classList.add('cross');
 //hide message
 document.getElementById('message').classList.add('hidden');
+//hide gameboard
+toggleGame();
 
 //----------GLOBAL FUNCTION CREATION----------//
 
@@ -36,27 +39,58 @@ var dark = function() {
 //create function to add appropriate classes
 var addClass = function() {
 	if (turn%2 == 0) { //check if player 1
-		//add .cross to the div found within
-		if (dark()) {
-			this.firstChild.classList.add('dark');
+		//check if choice is x
+		if (playerOne.symbol == 'cross') {
+			//check for dark
+			if (dark()) {
+				this.firstChild.classList.add('dark');
+			}
+			else {
+				this.firstChild.classList.add('cross');
+			}
+			currentPlayer.classList.remove('dark');
+			currentPlayer.classList.remove('cross');
+			currentPlayer.classList.add('circle');
 		}
 		else {
-			this.firstChild.classList.add('cross');
+			//add .circle to the div found within
+			this.firstChild.classList.add('circle');
+			currentPlayer.classList.remove('circle');
+			if (dark()) {
+				currentPlayer.classList.add('dark');
+			}
+			else {
+				currentPlayer.classList.add('cross');			
+			}	
 		}
-		currentPlayer.classList.remove('dark');
-		currentPlayer.classList.remove('cross');
-		currentPlayer.classList.add('circle');
+		
 	}
 	else { //player 2
-		//add .circle to the div found within
-		this.firstChild.classList.add('circle');
-		currentPlayer.classList.remove('circle');
-		if (dark()) {
-			currentPlayer.classList.add('dark');
+		//check if choice is x
+		if (playerTwo.symbol == 'cross') {
+			//check for dark
+			if (dark()) {
+				this.firstChild.classList.add('dark');
+			}
+			else {
+				this.firstChild.classList.add('cross');
+			}
+			currentPlayer.classList.remove('dark');
+			currentPlayer.classList.remove('cross');
+			currentPlayer.classList.add('circle');
 		}
 		else {
-			currentPlayer.classList.add('cross');			
+			//add .circle to the div found within
+			this.firstChild.classList.add('circle');
+			currentPlayer.classList.remove('circle');
+			if (dark()) {
+				currentPlayer.classList.add('dark');
+			}
+			else {
+				currentPlayer.classList.add('cross');			
+			}
 		}
+			
 	}
 	//add to counter which creates the alternating turn functionality
 	turn++;
@@ -93,24 +127,47 @@ var victory = function(winner) {
 	message.classList.remove('hidden');
 	var winningImage = document.getElementById('winningPlayer');
 	if (winner==1) {
-		winningImage.classList.remove('circle');
-		if (dark()) {
-			winningImage.classList.add('dark');
+		//check playerOne symbol
+		if (playerOne.symbol == 'cross' || playerOne.symbol == 'dark'){
+			winningImage.classList.remove('circle');
+			if (dark()) {
+				winningImage.classList.add('dark');
+			}
+			else {
+				winningImage.classList.add('cross');
+			}
 		}
+
 		else {
-			winningImage.classList.add('cross');
+			winningImage.classList.remove('dark');
+			winningImage.classList.remove('cross');
+			winningImage.classList.add('circle');
 		}
+	
 		//update p1 wins
-		p1Wins++;
-		document.getElementById('p1score').textContent = p1Wins;
+		playerOne.wins++;
+		document.getElementById('p1score').textContent = playerOne.wins;
 	}
 	else if (winner==2) {
-		winningImage.classList.remove('dark');
-		winningImage.classList.remove('cross');
-		winningImage.classList.add('circle');
+		//check playerTwo symbol
+		if (playerTwo.symbol == 'cross' || playerTwo.symbol == 'dark'){
+			winningImage.classList.remove('circle');
+			if (dark()) {
+				winningImage.classList.add('dark');
+			}
+			else {
+				winningImage.classList.add('cross');
+			}
+		}
+		else {
+			winningImage.classList.remove('dark');
+			winningImage.classList.remove('cross');
+			winningImage.classList.add('circle');
+		}
+			
 		//update p2 wins
-		p2Wins++;
-		document.getElementById('p2score').textContent = p2Wins;
+		playerTwo.wins++;
+		document.getElementById('p2score').textContent = playerTwo.wins;
 	}
 	else{//tie logic
 		tieTest();
@@ -212,6 +269,68 @@ function calculate() {
 	}
 }
 
+//create function to toggle game section so player can choose x or o
+function toggleGame() {
+	//toggle score
+	document.getElementById('score').classList.toggle('hidden');
+	//toggle stats
+	document.getElementById('stats').classList.toggle('hidden');
+	//toggle gameboard
+	document.getElementById('gameboard').classList.toggle('hidden');
+	//toggle buttons
+	document.getElementById('reset').classList.toggle('hidden');
+	//document.getElementById('dark').classList.toggle('hidden');
+}
+
+//create function to toggle choice menu
+function toggleChoice() {
+	document.getElementById('choice').classList.toggle('hidden');
+}
+
+//create choice functions
+function chooseX() {
+	playerOne.symbol = 'cross';
+	playerTwo.symbol = 'circle';
+	if (dark()) {
+		currentPlayer.classList.add('dark');
+		document.getElementById('player1').classList.add('dark');
+	}
+	else {
+		currentPlayer.classList.add(playerOne.symbol);
+		document.getElementById('player1').classList.add(playerOne.symbol);
+	}
+	document.getElementById('player2').classList.add(playerTwo.symbol);
+
+	toggleChoice();
+	toggleGame();
+}
+
+function chooseCircle() {
+	playerOne.symbol = 'circle';
+	playerTwo.symbol = 'cross';
+	currentPlayer.classList.add(playerOne.symbol);
+	document.getElementById('player1').classList.add(playerOne.symbol);
+	if (dark()) {
+		document.getElementById('player2').classList.add('dark');
+	}
+	else {
+		document.getElementById('player2').classList.add(playerTwo.symbol);
+	}
+	toggleChoice();
+	toggleGame();
+}
+
+function switchDark(object) {
+	if (object.classList.contains('cross')) {
+		object.classList.remove('cross');
+		object.classList.add('dark');
+	}
+	else if (object.classList.contains('dark')) {
+		object.classList.remove('dark');
+		object.classList.add('cross');
+	}
+}
+
 //----------GAME LOGIC----------//
 
 //initiate for loop to populate each div with eventlisteners
@@ -262,10 +381,17 @@ for (var i=0; i<sectionArray.length; i++) {
 	//add function that tests for a winner
 	sectionArray[i].addEventListener('mouseup',calculate);//end of victory event listener
 }
+//allow for player 1 to choose x or circle
+//make choice buttons work
+var xButton = document.querySelectorAll('button')[0];
+var oButton = document.querySelectorAll('button')[1];
+xButton.addEventListener('click', chooseX);
+oButton.addEventListener('click', chooseCircle);
+
 
 //make reset button work
 //store pointer to the reset button
-var button = document.querySelectorAll('button')[0];
+var button = document.querySelectorAll('button')[2];
 //addEventListener
 button.addEventListener('click', function() {
 	//iterate through the number of divs (9)
@@ -286,16 +412,15 @@ button.addEventListener('click', function() {
 		sectionArray[i].addEventListener('mouseup', calculate);
 
 	}
-	//first player will always be cross
-	if (dark()) {
-		currentPlayer.classList.add('dark');
-	}
-	else {
-		currentPlayer.classList.add('cross');
-	}
 
 	//reset currentPlayer stat
 	document.getElementById('stats').classList.remove('hidden');
+
+	//reset score symbols
+	var tempOne = document.getElementById('player1');
+	tempOne.classList.remove(tempOne.classList[0]);
+	var tempTwo = document.getElementById('player2');
+	tempTwo.classList.remove(tempTwo.classList[0]);
 
 	//hide message
 	document.getElementById('message').classList.add('hidden');
@@ -311,50 +436,28 @@ button.addEventListener('click', function() {
 
 	//reset board
 	board = [[0, 0, 0],[0, 0, 0],[0, 0, 0]];
+
+	//toggle game and choice
+	toggleGame();
+	toggleChoice();
 });
 
 //store pointer to dark/light button
-var darkButton = document.querySelectorAll('button')[1];
+var darkButton = document.querySelectorAll('button')[3];
 darkButton.addEventListener('click', function() {
 	document.querySelector('body').classList.toggle('dark');
 	for (var i=0; i<sectionArray.length; i++) {
-		if (sectionArray[i].firstChild.classList.contains('cross')) {
-			sectionArray[i].firstChild.classList.remove('cross');
-			sectionArray[i].firstChild.classList.add('dark');
-		}
-		else if (sectionArray[i].firstChild.classList.contains('dark')) {
-			sectionArray[i].firstChild.classList.remove('dark');
-			sectionArray[i].firstChild.classList.add('cross');
-		}
-	}
-	if (currentPlayer.classList.contains('cross')) {
-		currentPlayer.classList.remove('cross');
-		currentPlayer.classList.add('dark');
-	}
-	else if (currentPlayer.classList.contains('dark')) {
-		currentPlayer.classList.remove('dark');
-		currentPlayer.classList.add('cross');
+		switchDark(sectionArray[i].firstChild)
 	}
 
-	var score1 = document.getElementById('player1')
-	if (score1.classList.contains('cross')) {
-		score1.classList.remove('cross');
-		score1.classList.add('dark');
-	}
-	else if (score1.classList.contains('dark')) {
-		score1.classList.remove('dark');
-		score1.classList.add('cross');
-	}
+	switchDark(currentPlayer);
+	switchDark(document.getElementById('player1'));
+	switchDark(document.getElementById('player2'));
+	switchDark(document.getElementById('winningPlayer'));
+	switchDark(document.getElementById('x'));
 
-	var winner = document.getElementById('winningPlayer')
-	if (winner.classList.contains('cross')) {
-		winner.classList.remove('cross');
-		winner.classList.add('dark');
-	}
-	else if (winner.classList.contains('dark')) {
-		winner.classList.remove('dark');
-		winner.classList.add('cross');
-	}
+	darkButton.classList.toggle('dark');
+	button.classList.toggle('dark');
 
 	count++;
 });

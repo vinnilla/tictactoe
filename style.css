@@ -16,7 +16,8 @@ div, p {
 }
 
 button {
-	margin-top: 5em;
+	margin: 5em 2em 0 2em;
+	background-color: transparent;
 }
 
 #title {
@@ -97,8 +98,12 @@ body.dark{
 	background-color:rgba(0,0,5,.9);
 	color: white;
 }
-div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark, div#player1.dark {
+div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark, div#player1.dark, div#player2.dark, #x.dark {
 	background-image:url('images/xyellow.png');
+}
+
+button.dark {
+	color: white;
 }
 
 /*positioning of the scores*/
@@ -170,4 +175,30 @@ div.center.dark, div#currentPlayer.dark, div#winningPlayer.dark, div#player1.dar
 
 #content {
 	min-width: 50em;
+}
+
+/*choice window*/
+#choice {
+	text-align:center;
+}
+
+#choiceMessage {
+	width: 100%;
+	height: 1em;
+}
+
+#x.cross {
+	background-image:url('images/x.png');
+}
+
+#o {
+	background-image:url('images/circle.png');
+}
+
+#x, #o {
+	height: 6em;
+	width: 6em;
+	background-size: 100%;
+	background-repeat:no-repeat;
+	background-position: center;
 }
