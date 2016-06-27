@@ -11,6 +11,7 @@ The reset button can be used to reset the game board so that another round can b
 The dark/light button can be used to change the white background to a darker one and vice versa. 
 
 Known bugs:
-1. Clicking rapidly on the gameboard may cause the game functionality to break. This is due to some of the game logic relying on mousedown and mouseup events. Rapidly clicking causes these events to mix and game logic may break.
 
-2. Loading the font may be delayed depending on internet speed and host website status.
+--Clicking rapidly on the gameboard may cause the game functionality to break. This is due to some of the game logic relying on mousedown and mouseup events. Rapidly clicking causes these events to mix and game logic may break.
+
+--Loading the font may be delayed depending on internet speed and host website status.
